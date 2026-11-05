@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathematics Portal | M.Sc. Mathematics</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: #111827;
+      --border-color: #1f2937;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #38bdf8;
+      --gold: #f59e0b;
+    }
+   
+/* --- YETHE NAVIN CODE PASTE KARA (Bracket chya baher) --- */
+.la-studio-box {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 24px;
+  border-radius: 12px;
+  margin: 30px auto;
+  max-width: 1050px;
+  border: 1px solid #334155;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.la-title-area { text-align: center; margin-bottom: 20px; }
+.la-title-area h2 { color: #38bdf8; font-size: 1.8rem; margin-bottom: 6px; }
+.la-tab-bar { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.la-nav-btn {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.la-nav-btn.active, .la-nav-btn:hover {
+  color: #38bdf8;
+  border-color: #38bdf8;
+  background: #172554;
+}
+.la-tab-panel { display: none; background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; }
+.la-tab-panel.active { display: block; }
+.la-ctrl-row { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+.la-ctrl-row input, .la-ctrl-row select {
+  background: #090d16;
+  border: 1px solid #334155;
+  color: #f8fafc;
+  padding: 6px 8px;
+  border-radius: 6px;
+  width: 65px;
+}
+.la-canvas-row { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.la-draw-canvas { background: #090d16; border: 1px solid #334155; border-radius: 8px; }
+.la-sidebar { flex: 1; min-width: 270px; background: #090d16; border: 1px solid #334155; border-radius: 8px; padding: 16px; font-size: 0.92rem; line-height: 1.5; }
+.la-sidebar h4 { color: #38bdf8; margin-bottom: 8px; }
+.la-mat-display { display: inline-block; border-left: 2px solid #f8fafc; border-right: 2px solid #f8fafc; padding: 4px 8px; font-family: monospace; }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.2rem 2rem;
+      background: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-main);
+    }
+
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      width: 100%;
+    }
+
+    .hero {
+      background: linear-gradient(145deg, #131c2e, #0e1524);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-img-wrap {
+      flex-shrink: 0;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--gold);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
+      background-color: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-content h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .hero-content .subtitle {
+      color: var(--gold);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-content blockquote {
+      font-style: italic;
+      color: var(--text-muted);
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: var(--accent);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+      flex: 1;
+    }
+
+    .topic-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .topic-list li {
+      font-size: 0.9rem;
+      padding: 0.35rem 0;
+      color: #d1d5db;
+      border-bottom: 1px dashed #1f2937;
+    }
+
+    .topic-list li:last-child {
+      border-bottom: none;
+    }
+
+    .math-formula {
+      background: #0b0f19;
+      border: 1px solid #1e293b;
+      padding: 0.8rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: auto;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.8rem;
+      }
+      .hero-content blockquote {
+        border-left: none;
+        border-top: 2px solid var(--accent);
+        padding-top: 0.8rem;
+        padding-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">&int; MATH LAB</div>
+    <nav>
+      <a href="#linear-algebra">Linear Algebra</a>
+      <a href="#real-analysis">Real Analysis</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-img-wrap">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Srinivasa_Ramanujan_-_OPC_-_1.jpg/440px-Srinivasa_Ramanujan_-_OPC_-_1.jpg" 
+          alt="Srinivasa Ramanujan" 
+          referrerpolicy="no-referrer"
+          loading="eager">
+      </div>
+      <div class="hero-content">
+        <h1>Srinivasa Ramanujan</h1>
+        <div class="subtitle">1887 – 1920 &bull; Mathematical Genius</div>
+        <blockquote>
+          "An equation for me has no meaning unless it expresses a thought of God."
+        </blockquote>
+      </div>
+    </section>
+
+    <h2 class="section-title">Academic Modules</h2>
+    <div class="grid">
+      
+      <article class="card" id="linear-algebra">
+        <h3>Linear Algebra</h3>
+        <p>Comprehensive study of finite-dimensional vector spaces, transformations, and forms.</p>
+        <ul class="topic-list">
+          <li>&bull; Vector Spaces & Subspaces</li>
+          <li>&bull; Dual Spaces & Annihilators $W^0$</li>
+          <li>&bull; Linear Transformations & Invariance</li>
+          <li>&bull; Canonical Forms & Bilinear Forms</li>
+        </ul>
+        <div class="math-formula">
+          $$\dim(V) = \dim(W) + \dim(W^0)$$
+        </div>
+        <a href="#la-studio" style="display: inline-block; margin-top: 15px; padding: 8px 16px; background: #38bdf8; color: #0b0f19; font-weight: 700; border-radius: 6px; text-decoration: none; text-align: center;">⚡ Open Visual Studio</a>
+      </article>
+      <!-- Linear Algebra Interactive Studio -->
+<div class="la-studio">
+  <div class="la-title-area">
+    <h2>Linear Algebra Visual Studio</h2>
+    <p style="color: #94a3b8;">Shivaji University (M.Sc. Part-I) | Interactive Concept Lab</p>
+  </div>
+
+  <div class="la-tab-bar">
+    <button type="button" class="la-nav-btn active" onclick="laOpenTab(0)">Unit 1: Kernel & Duals</button>
+    <button type="button" class="la-nav-btn" onclick="laOpenTab(1)">Unit 2: IPS & Gram-Schmidt</button>
+    <button type="button" class="la-nav-btn" onclick="laOpenTab(2)">Unit 3: Jordan Blocks</button>
+    <button type="button" class="la-nav-btn" onclick="laOpenTab(3)">Unit 4: Operators Spectrum</button>
+  </div>
+
+<!-- UNIT 1: Vector Spaces, Duals, Annihilator & Kernel -->
+  <div class="la-tab-panel active" id="la-panel-0">
+    <h3 style="margin-bottom: 12px; color: #38bdf8;">Unit I: Vector Spaces, Dual Basis & Annihilators</h3>
+    
+    <div class="la-ctrl-row" style="gap: 10px; margin-bottom: 10px;">
+      <label>Visual Mode: </label>
+      <select id="la-u1-mode" onchange="laDrawU1()" style="width: auto; background: #090d16; color: #fff; padding: 4px; border: 1px solid #334155; border-radius: 4px;">
+        <option value="kernel">1. Matrix T & Kernel ker(T)</option>
+        <option value="dual">2. Dual Functional f(v) = c & Dual Basis</option>
+        <option value="annihilator">3. Subspace W & Annihilator A(W)</option>
+      </select>
+    </div>
+
+    <div class="la-ctrl-row" id="la-u1-matrix-ctrls">
+      <span>Matrix T: </span>
+      [<input type="number" id="la-t00" value="1" step="0.5" onchange="laDrawU1()">
+       <input type="number" id="la-t01" value="2" step="0.5" onchange="laDrawU1()">]
+      [<input type="number" id="la-t10" value="2" step="0.5" onchange="laDrawU1()">
+       <input type="number" id="la-t11" value="4" step="0.5" onchange="laDrawU1()">]
+    </div>
+
+    <div class="la-ctrl-row" id="la-u1-dual-ctrls" style="display: none;">
+      <label>Functional f(x, y) = a·x + b·y : </label>
+      a = <input type="number" id="la-f-a" value="1" step="0.5" onchange="laDrawU1()">
+      b = <input type="number" id="la-f-b" value="2" step="0.5" onchange="laDrawU1()">
+    </div>
+
+    <div class="la-canvas-row">
+      <canvas id="laCanvas1" class="la-draw-canvas" width="360" height="300"></canvas>
+      <div class="la-sidebar">
+        <h4>Dual & Dimension Analysis</h4>
+        <div id="la-u1-res"></div>
+        <hr style="border-color: #334155; margin: 10px 0;">
+        <p><strong>Dual Space V*:</strong> Space of linear functionals V &rarr; F</p>
+        <p><strong>Dimension:</strong> dim(V) = dim(V*)</p>
+        <p><strong>Annihilator Theorem:</strong> dim(W) + dim(A(W)) = dim(V)</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- UNIT 2 -->
+  <div class="la-tab-panel" id="la-panel-1">
+    <h3 style="margin-bottom: 12px; color: #38bdf8;">Unit II: Inner Product Spaces & Gram-Schmidt</h3>
+    <div class="la-ctrl-row">
+      <button type="button" class="la-nav-btn" onclick="laTriggerGS()">Run Gram-Schmidt Process</button>
+    </div>
+    <div class="la-canvas-row">
+      <canvas id="laCanvas2" class="la-draw-canvas" width="360" height="300"></canvas>
+      <div class="la-sidebar">
+        <h4>Orthonormal Output</h4>
+        <div id="la-u2-res"></div>
+        <hr style="border-color: #334155; margin: 10px 0;">
+        <p><strong>Gram-Schmidt:</strong> Converts basis to orthonormal set</p>
+        <p><strong>Cauchy-Schwarz:</strong> |&langle;u, v&rangle;| &le; ||u|| ||v||</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIT 3 -->
+  <div class="la-tab-panel" id="la-panel-2">
+    <h3 style="margin-bottom: 12px; color: #38bdf8;">Unit III: Canonical Forms (Jordan Blocks)</h3>
+    <div class="la-ctrl-row">
+      <label>Eigenvalue (&lambda;): </label>
+      <input type="number" id="la-eig-val" value="2" onchange="laRenderJordan()">
+      <label>Block Size: </label>
+      <select id="la-block-sz" onchange="laRenderJordan()" style="width: auto;">
+        <option value="2">2 &times; 2</option>
+        <option value="3" selected>3 &times; 3</option>
+        <option value="4">4 &times; 4</option>
+      </select>
+    </div>
+    <div class="la-canvas-row">
+      <div class="la-sidebar" style="width: 100%;">
+        <h4>Basic Jordan Block J<sub>m</sub>(&lambda;)</h4>
+        <div id="la-jordan-matrix" class="la-mat-display"></div>
+        <div id="la-jordan-info" style="margin-top: 14px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIT 4 -->
+  <div class="la-tab-panel" id="la-panel-3">
+    <h3 style="margin-bottom: 12px; color: #38bdf8;">Unit IV: Operator Types & Spectral Location</h3>
+    <div class="la-ctrl-row">
+      <label>Operator Type: </label>
+      <select id="la-trans-type" onchange="laDrawU4()" style="width: auto;">
+        <option value="hermitian">Hermitian (Real &lambda;)</option>
+        <option value="unitary">Unitary (|&lambda;| = 1)</option>
+        <option value="skew">Skew-Hermitian (Pure Imaginary)</option>
+        <option value="normal">Normal (Complex Plane)</option>
+      </select>
+    </div>
+    <div class="la-canvas-row">
+      <canvas id="laCanvas4" class="la-draw-canvas" width="360" height="300"></canvas>
+      <div class="la-sidebar">
+        <h4>Eigenvalue Spectrum</h4>
+        <div id="la-u4-res"></div>
+      </div>
+    </div>
+  </div>
+                                                             </div>
+
+      <article class="card" id="real-analysis">
+        <h3>Real Analysis</h3>
+        <p>Rigorous study of the real number system, metric topology, and convergence.</p>
+        <ul class="topic-list">
+          <li>&bull; Topology of $\mathbb{R}^n$ & Compactness</li>
+          <li>&bull; Sequences, Series & Uniform Convergence</li>
+          <li>&bull; Riemann-Stieltjes Integration</li>
+          <li>&bull; Continuity & Differentiability</li>
+        </ul>
+        <div class="math-formula">
+          $$|f(x) - f(c)| < \varepsilon \text{ whenever } |x - c| < \delta$$
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; Mathematical Studies & Research Portal &bull; GitHub Pages
+  </footer>
+<script>
+  function laOpenTab(tabIndex) {
+    document.querySelectorAll('.la-nav-btn').forEach((btn, i) => btn.classList.toggle('active', i === tabIndex));
+    document.querySelectorAll('.la-tab-panel').forEach((panel, i) => panel.classList.toggle('active', i === tabIndex));
+    if (tabIndex === 0) laDrawU1();
+    if (tabIndex === 1) laDrawU2();
+    if (tabIndex === 2) laRenderJordan();
+    if (tabIndex === 3) laDrawU4();
+  }
+
+  
+    function laDrawU1() {
+    const canvas = document.getElementById('laCanvas1');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    const modeEl = document.getElementById('la-u1-mode');
+    const mode = modeEl ? modeEl.value : 'kernel';
+
+    const matCtrls = document.getElementById('la-u1-matrix-ctrls');
+    const dualCtrls = document.getElementById('la-u1-dual-ctrls');
+    const resEl = document.getElementById('la-u1-res');
+
+    if (matCtrls) matCtrls.style.display = (mode === 'kernel') ? 'flex' : 'none';
+    if (dualCtrls) dualCtrls.style.display = (mode !== 'kernel') ? 'flex' : 'none';
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+
+    // Coordinate Axes
+    ctx.strokeStyle = '#334155';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy);
+    ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height);
+    ctx.stroke();
+
+    if (mode === 'kernel') {
+      const el00 = document.getElementById('la-t00');
+      const el01 = document.getElementById('la-t01');
+      const el10 = document.getElementById('la-t10');
+      const el11 = document.getElementById('la-t11');
+
+      const a = el00 ? parseFloat(el00.value) || 0 : 0;
+      const b = el01 ? parseFloat(el01.value) || 0 : 0;
+      const c = el10 ? parseFloat(el10.value) || 0 : 0;
+      const d = el11 ? parseFloat(el11.value) || 0 : 0;
+
+      const det = a * d - b * c;
+      const rank = (a === 0 && b === 0 && c === 0 && d === 0) ? 0 : (det !== 0 ? 2 : 1);
+      const nullity = 2 - rank;
+
+      if (resEl) {
+        resEl.innerHTML = `
+          <p>Det(T): <strong>${det.toFixed(2)}</strong></p>
+          <p>dim(V) = 2</p>
+          <p>Rank(T): <strong>${rank}</strong> | Nullity: <strong>${nullity}</strong></p>
+          <p style="color: ${rank === 2 ? '#4ade80' : '#fb7185'}">
+            ${rank === 2 ? 'Invertible: ker(T) = {0}' : 'Singular: ker(T) is 1-D Subspace'}
+          </p>
+        `;
+      }
+
+      if (nullity === 1) {
+        ctx.strokeStyle = '#fb7185';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        let vx = b !== 0 ? -b : -d;
+        let vy = b !== 0 ? a : c;
+        ctx.moveTo(cx - vx * 80, cy + vy * 80);
+        ctx.lineTo(cx + vx * 80, cy - vy * 80);
+        ctx.stroke();
+        ctx.fillStyle = '#fb7185';
+        ctx.fillText("Kernel Subspace ker(T)", cx + 15, cy - 20);
+      }
+    } else if (mode === 'dual') {
+      const elA = document.getElementById('la-f-a');
+      const elB = document.getElementById('la-f-b');
+      const a = elA ? parseFloat(elA.value) || 1 : 1;
+      const b = elB ? parseFloat(elB.value) || 2 : 2;
+
+      for (let cVal = -2; cVal <= 2; cVal++) {
+        ctx.strokeStyle = (cVal === 0) ? '#38bdf8' : 'rgba(56, 189, 248, 0.45)';
+        ctx.lineWidth = (cVal === 0) ? 2.5 : 1;
+        ctx.beginPath();
+        if (b !== 0) {
+          let x1 = -180, y1 = (cVal * 30 - a * x1) / b;
+          let x2 = 180, y2 = (cVal * 30 - a * x2) / b;
+          ctx.moveTo(cx + x1, cy - y1);
+          ctx.lineTo(cx + x2, cy - y2);
+        } else if (a !== 0) {
+          let xLine = (cVal * 30) / a;
+          ctx.moveTo(cx + xLine, 0);
+          ctx.lineTo(cx + xLine, canvas.height);
+        }
+        ctx.stroke();
+      }
+
+      if (resEl) {
+        resEl.innerHTML = `
+          <p>Linear Functional: <strong>f(x,y) = ${a}x + ${b}y</strong></p>
+          <p>Solid Line: <strong>f(v) = 0</strong> (Kernel of f)</p>
+          <p>Parallel Lines: <strong>f(v) = c</strong> (Level Fibers)</p>
+          <p>Dual Basis: <strong>f_i(e_j) = &delta;<sub>ij</sub></strong></p>
+        `;
+      }
+    } else if (mode === 'annihilator') {
+      const elA = document.getElementById('la-f-a');
+      const elB = document.getElementById('la-f-b');
+      const a = elA ? parseFloat(elA.value) || 1 : 1;
+      const b = elB ? parseFloat(elB.value) || 2 : 2;
+
+      // Subspace W: along (b, -a)
+      ctx.strokeStyle = '#4ade80';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(cx - b * 70, cy - a * 70);
+      ctx.lineTo(cx + b * 70, cy + a * 70);
+      ctx.stroke();
+      ctx.fillStyle = '#4ade80';
+      ctx.fillText("Subspace W", cx + b * 35 + 8, cy + a * 35);
+
+      // Annihilator A(W): normal vector direction (a, b)
+      ctx.strokeStyle = '#fb7185';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + a * 50, cy - b * 50);
+      ctx.stroke();
+      ctx.fillStyle = '#fb7185';
+      ctx.fillText("Functional Basis for A(W)", cx + a * 50 + 6, cy - b * 50);
+
+      if (resEl) {
+        resEl.innerHTML = `
+          <p>Subspace: <strong>dim(W) = 1</strong></p>
+          <p>Space: <strong>dim(V) = 2</strong></p>
+          <p>Annihilator: <strong>dim(A(W)) = 2 - 1 = 1</strong></p>
+          <p style="color:#fb7185;">dim(W) + dim(A(W)) = dim(V)</p>
+        `;
+      }
+    }
+  }
+
+  function laDrawU2() {
+    const canvas = document.getElementById('laCanvas2');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+
+    ctx.strokeStyle = '#334155';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy);
+    ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height);
+    ctx.stroke();
+
+    laDrawLine(ctx, cx, cy, 100, 0, '#38bdf8', 'v1');
+    laDrawLine(ctx, cx, cy, 70, -70, '#c084fc', 'v2');
+
+    document.getElementById('la-u2-res').innerHTML = `
+      <p>Input Basis: v1 = (2.5, 0), v2 = (1.7, 1.7)</p>
+      <p>Inner product &ne; 0 (Not orthogonal)</p>
+    `;
+  }
+
+  function laTriggerGS() {
+    const canvas = document.getElementById('laCanvas2');
+    const ctx = canvas.getContext('2d');
+    laDrawU2();
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+
+    laDrawLine(ctx, cx, cy, 90, 0, '#4ade80', 'e1');
+    laDrawLine(ctx, cx, cy, 0, -90, '#4ade80', 'e2');
+
+    document.getElementById('la-u2-res').innerHTML = `
+      <p style="color:#4ade80; font-weight:bold;">Gram-Schmidt Complete:</p>
+      <p><strong>e1</strong> = (1, 0)</p>
+      <p><strong>e2</strong> = (0, 1)</p>
+      <p>&langle;e1, e2&rangle; = 0 | Length = 1</p>
+    `;
+  }
+
+  function laDrawLine(ctx, x, y, dx, dy, col, name) {
+    ctx.strokeStyle = col;
+    ctx.fillStyle = col;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + dx, y + dy);
+    ctx.stroke();
+    ctx.fillText(name, x + dx + 6, y + dy - 6);
+  }
+
+  function laRenderJordan() {
+    const l = document.getElementById('la-eig-val').value;
+    const sz = parseInt(document.getElementById('la-block-sz').value);
+    let html = "";
+    for (let i = 0; i < sz; i++) {
+      html += "[ ";
+      for (let j = 0; j < sz; j++) {
+        if (i === j) html += `<span style="color:#38bdf8; font-weight:bold;">${l}</span> `;
+        else if (j === i + 1) html += `<span style="color:#4ade80; font-weight:bold;">1</span> `;
+        else html += `<span style="color:#64748b;">0</span> `;
+      }
+      html += " ]<br>";
+    }
+    document.getElementById('la-jordan-matrix').innerHTML = html;
+    document.getElementById('la-jordan-info').innerHTML = `
+      <p>Minimal Polynomial: <strong>p(x) = (x - ${l})<sup>${sz}</sup></strong></p>
+    `;
+  }
+
+  function laDrawU4() {
+    const canvas = document.getElementById('laCanvas4');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const type = document.getElementById('la-trans-type').value;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+
+    ctx.strokeStyle = '#334155';
+    ctx.beginPath();
+    ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy);
+    ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height);
+    ctx.stroke();
+
+    ctx.fillStyle = '#64748b';
+    ctx.fillText("Real (Re)", canvas.width - 55, cy - 8);
+    ctx.fillText("Imag (Im)", cx + 8, 20);
+
+    let info = "";
+    if (type === 'hermitian') {
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(25, cy); ctx.lineTo(canvas.width - 25, cy);
+      ctx.stroke();
+      info = "<strong>Hermitian (T* = T):</strong> Eigenvalues strictly on Real line.";
+    } else if (type === 'unitary') {
+      ctx.strokeStyle = '#4ade80';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 75, 0, 2 * Math.PI);
+      ctx.stroke();
+      info = "<strong>Unitary (T*T = I):</strong> Eigenvalues on Unit Circle (|&lambda;| = 1).";
+    } else if (type === 'skew') {
+      ctx.strokeStyle = '#fb7185';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(cx, 25); ctx.lineTo(cx, canvas.height - 25);
+      ctx.stroke();
+      info = "<strong>Skew-Hermitian (T* = -T):</strong> Eigenvalues on Imaginary axis.";
+    } else if (type === 'normal') {
+      ctx.fillStyle = 'rgba(192, 132, 252, 0.2)';
+      ctx.fillRect(35, 35, canvas.width - 70, canvas.height - 70);
+      info = "<strong>Normal (T*T = TT*):</strong> Any complex number; unitarily diagonalizable.";
+    }
+    document.getElementById('la-u4-res').innerHTML = `<p>${info}</p>`;
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    laDrawU1();
+  });
+  </script>
+</body>
+</html>
