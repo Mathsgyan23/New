@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M.Sc. Mathematics - Numerical Analysis I</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- MathJax Configuration -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!-- Chart.js for Interactive Curves -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .glass-nav {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen selection:bg-indigo-500 selection:text-white">
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <span class="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></span>
+        <span class="font-bold text-lg text-white tracking-wide">Shivaji University | M.Sc. Math</span>
+      </div>
+      <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
+        <a href="#overview" class="hover:text-indigo-400 transition">Course Info</a>
+        <a href="#unit1" class="hover:text-indigo-400 transition">Unit I: Transcendental & Polynomial</a>
+        <a href="#visualizer1" class="hover:text-indigo-400 transition">Interactive Graph</a>
+        <a href="#unit2" class="hover:text-indigo-400 transition">Unit II: Linear Systems & Eigenvalues</a>
+        <a href="#gerschgorin" class="hover:text-indigo-400 transition">Gerschgorin Discs</a>
+      </nav>
+      <a href="#unit1" class="px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg transition">
+        Syllabus Guide
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="overview" class="relative py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center border-b border-slate-800/80">
+    <div class="inline-block px-3 py-1 mb-3 text-xs font-semibold tracking-wider text-indigo-400 uppercase bg-indigo-950/60 rounded-full border border-indigo-800/60">
+      M.Sc. Mathematics (Part I - Semester I) | NEP-2020 (Level-6.0)
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto">
+      Numerical Analysis - I
+    </h1>
+    <p class="mt-3 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">
+      Complete lecture notes, core mathematical definitions, order of convergence proofs, error equations, and interactive visualizers.
+    </p>
+
+    <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
+      <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="text-xs text-slate-400 font-medium">Total Credits</div>
+        <div class="text-lg font-bold text-white mt-1">02 Credits</div>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="text-xs text-slate-400 font-medium">Lectures</div>
+        <div class="text-lg font-bold text-white mt-1">30 Lectures</div>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="text-xs text-slate-400 font-medium">Core Areas</div>
+        <div class="text-lg font-bold text-white mt-1">Roots & Linear Systems</div>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+        <div class="text-xs text-slate-400 font-medium">Reference</div>
+        <div class="text-lg font-bold text-white mt-1">M. K. Jain et al.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    
+    <!-- UNIT I -->
+    <section id="unit1" class="space-y-8">
+      <div class="flex items-center space-x-3 border-b border-indigo-900/40 pb-4">
+        <div class="px-3 py-1 bg-indigo-600/30 text-indigo-400 text-sm font-bold rounded-lg border border-indigo-500/30">UNIT I</div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white">Transcendental & Polynomial Equations (15 Lectures)</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <div class="flex justify-between items-center">
+            <h3 class="text-lg font-semibold text-indigo-300">1. Bisection Method</h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-emerald-400">Order p = 1</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Based on Bolzano's Intermediate Value Theorem: If $f(a)f(b) < 0$, a real root $\xi \in (a,b)$ exists. Repeatedly bisects the bracket interval.
+          </p>
+          <div class="bg-slate-950 p-3 rounded-lg text-xs font-mono text-emerald-400 border border-slate-800">
+            $$x_{k+1} = \frac{a_k + b_k}{2}, \quad |x_k - \xi| \le \frac{b - a}{2^k} \le \epsilon$$
+          </div>
+          <p class="text-xs text-slate-400">Iterations needed: $n \ge \frac{\log(b - a) - \log \epsilon}{\log 2}$. Guaranteed convergence.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <div class="flex justify-between items-center">
+            <h3 class="text-lg font-semibold text-indigo-300">2. Secant & Regula-Falsi</h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-indigo-400">p = 1.618 / 1.0</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Approximates $f(x)$ by a first-degree linear secant chord through $(x_{k-1}, f_{k-1})$ and $(x_k, f_k)$.
+          </p>
+          <div class="bg-slate-950 p-3 rounded-lg text-xs font-mono text-emerald-400 border border-slate-800">
+            $$x_{k+1} = x_k - \frac{x_k - x_{k-1}}{f_k - f_{k-1}} f_k$$
+          </div>
+          <p class="text-xs text-slate-400">
+            <strong>Secant:</strong> $\alpha = \frac{1+\sqrt{5}}{2} \approx 1.618$ (Superlinear).<br>
+            <strong>Regula-Falsi:</strong> Bracket maintained, linear rate of convergence ($p = 1$).
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <div class="flex justify-between items-center">
+            <h3 class="text-lg font-semibold text-indigo-300">3. Newton-Raphson</h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-cyan-400">Order p = 2</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Replaces the curve locally by its tangent line at $(x_k, f(x_k))$. Requires $f'(x_k) \ne 0$.
+          </p>
+          <div class="bg-slate-950 p-3 rounded-lg text-xs font-mono text-emerald-400 border border-slate-800">
+            $$x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}$$
+          </div>
+          <p class="text-xs text-slate-400">
+            Possesses quadratic convergence ($p = 2$) for simple roots. For roots of multiplicity $m \ge 2$, the order drops to 1.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-4">
+        <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>Derivation: Order of Convergence of Newton-Raphson Method</span>
+        </h3>
+        
+        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
+          <p>
+            Let $\xi$ be a simple root so that $f(\xi) = 0$ and $f'(\xi) \ne 0$. Let the error at step $k$ be $\epsilon_k = x_k - \xi$, which implies $x_k = \xi + \epsilon_k$.
+          </p>
+          <p>
+            Substituting $x_k$ into the iterative scheme gives:
+          </p>
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 overflow-x-auto text-center font-mono text-xs sm:text-sm text-indigo-200">
+            $$\epsilon_{k+1} = \epsilon_k - \frac{f(\xi + \epsilon_k)}{f'(\xi + \epsilon_k)}$$
+            $$= \epsilon_k - \frac{\epsilon_k f'(\xi) + \frac{\epsilon_k^2}{2} f''(\xi) + \mathcal{O}(\epsilon_k^3)}{f'(\xi) + \epsilon_k f''(\xi) + \mathcal{O}(\epsilon_k^2)}$$
+            $$= \epsilon_k - \left[\epsilon_k + \frac{\epsilon_k^2}{2}\frac{f''(\xi)}{f'(\xi)}\right] \left[1 + \epsilon_k \frac{f''(\xi)}{f'(\xi)}\right]^{-1}$$
+            $$= \epsilon_k - \left[\epsilon_k + \frac{\epsilon_k^2}{2}\frac{f''(\xi)}{f'(\xi)}\right] \left[1 - \epsilon_k \frac{f''(\xi)}{f'(\xi)} + \mathcal{O}(\epsilon_k^2)\right]$$
+            $$\epsilon_{k+1} = \frac{1}{2}\frac{f''(\xi)}{f'(\xi)} \epsilon_k^2 + \mathcal{O}(\epsilon_k^3)$$
+          </div>
+          <p class="text-emerald-400 font-semibold text-xs sm:text-sm">
+            Thus, the error equation is $\epsilon_{k+1} = C \epsilon_k^2$ where $C = \frac{1}{2}\frac{f''(\xi)}{f'(\xi)}$, proving second-order (quadratic) convergence.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <h3 class="text-lg font-bold text-indigo-300">Birge-Vieta Method (Real Roots)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Extracts linear factor $(x - p)$ from polynomial $P_n(x) = a_0 x^n + a_1 x^{n-1} + \dots + a_n = 0$. Evaluates $P_n(p)$ and $P'_n(p)$ using Horner's synthetic division scheme:
+          </p>
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs space-y-1 text-slate-300">
+            <div>$b_0 = a_0, \quad b_k = a_k + p b_{k-1} \implies b_n = P_n(p) = R$</div>
+            <div>$c_0 = b_0, \quad c_k = b_k + p c_{k-1} \implies c_{n-1} = P'_n(p) = \frac{dR}{dp}$</div>
+            <div class="text-emerald-400 font-bold pt-2">$$p_{k+1} = p_k - \frac{b_n}{c_{n-1}}$$</div>
+          </div>
+          <p class="text-xs text-slate-400">After convergence to desired accuracy, the quotient polynomial $Q_{n-1}(x) = \sum b_k x^{n-1-k}$ is used for deflation.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <h3 class="text-lg font-bold text-indigo-300">Bairstow's Method (Quadratic Factors)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Extracts quadratic factors $x^2 + px + q$ to locate complex conjugate roots of real polynomials without using complex numbers:
+          </p>
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs space-y-1 text-slate-300">
+            <div>$P_n(x) = (x^2 + px + q)Q_{n-2}(x) + R x + S$</div>
+            <div>$b_k = a_k - p b_{k-1} - q b_{k-2}, \quad c_k = b_k - p c_{k-1} - q c_{k-2}$</div>
+            <div class="text-emerald-400 font-bold pt-1">$$\Delta p = -\frac{b_n c_{n-3} - b_{n-1} c_{n-2}}{c_{n-2}^2 - c_{n-3}(c_{n-1} - b_{n-1})}$$</div>
+            <div class="text-emerald-400 font-bold">$$\Delta q = -\frac{b_{n-1}(c_{n-1} - b_{n-1}) - b_n c_{n-2}}{c_{n-2}^2 - c_{n-3}(c_{n-1} - b_{n-1})}$$</div>
+          </div>
+          <p class="text-xs text-slate-400">Updated values: $p_{k+1} = p_k + \Delta p$, $q_{k+1} = q_k + \Delta q$.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE VISUALIZER -->
+    <section id="visualizer1" class="p-6 rounded-2xl bg-slate-900/70 border border-indigo-900/60 space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+        <div>
+          <span class="text-xs font-semibold uppercase text-indigo-400 tracking-wider">Dynamic Visualizer</span>
+          <h3 class="text-xl font-bold text-white mt-1">Newton-Raphson Tangent Iteration</h3>
+          <p class="text-xs text-slate-400">Step through the tangent projections for $f(x) = x^3 - x - 1 = 0$ (Root $\xi \approx 1.3247$)</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <button id="btnStep" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs sm:text-sm font-semibold shadow transition">
+            Next Tangent Step
+          </button>
+          <button id="btnReset" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs sm:text-sm font-semibold transition">
+            Reset (x₀ = 2.0)
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+        <div class="lg:col-span-2 bg-slate-950 p-4 rounded-xl border border-slate-800 relative">
+          <canvas id="nrChart" height="260"></canvas>
+        </div>
+        
+        <div class="space-y-4 bg-slate-950 p-5 rounded-xl border border-slate-800">
+          <div class="text-xs uppercase text-slate-400 tracking-wider font-semibold">Iteration State</div>
+          <div class="text-2xl font-bold text-white font-mono" id="currentX">x₀ = 2.0000</div>
+          <div class="space-y-2 text-xs font-mono text-slate-300">
+            <div>$f(x_k) = $ <span id="currentFx" class="text-indigo-400">5.0000</span></div>
+            <div>$f'(x_k) = $ <span id="currentFpx" class="text-indigo-400">11.0000</span></div>
+            <div>Step Index: <span id="currentStep" class="text-emerald-400">k = 0</span></div>
+          </div>
+          <div class="p-3 rounded-lg bg-slate-900 text-xs text-slate-400 border border-slate-800">
+            Observe the tangent line at $(x_k, f(x_k))$ crossing the $x$-axis to produce $x_{k+1}$.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT II -->
+    <section id="unit2" class="space-y-8">
+      <div class="flex items-center space-x-3 border-b border-indigo-900/40 pb-4">
+        <div class="px-3 py-1 bg-indigo-600/30 text-indigo-400 text-sm font-bold rounded-lg border border-indigo-500/30">UNIT II</div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white">System of Linear Equations & Eigenvalues (15 Lectures)</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4">
+          <h3 class="text-lg font-bold text-indigo-300">Matrix Factorization (LU Decomposition)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Decomposes coefficient matrix $A = LU$. Transforms $Ax = b$ into two triangular systems: Forward substitution $L z = b$, followed by back-substitution $U x = z$.
+          </p>
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+              <div class="font-bold text-white mb-1">Doolittle's Method</div>
+              <p class="text-slate-400 text-xs">Unit lower triangular matrix ($l_{ii} = 1$).</p>
+              <div class="text-indigo-400 mt-2 font-mono">$$\text{diag}(L) = [1, 1, \dots, 1]$$</div>
+            </div>
+            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+              <div class="font-bold text-white mb-1">Crout's Method</div>
+              <p class="text-slate-400 text-xs">Unit upper triangular matrix ($u_{ii} = 1$).</p>
+              <div class="text-indigo-400 mt-2 font-mono">$$\text{diag}(U) = [1, 1, \dots, 1]$$</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4">
+          <h3 class="text-lg font-bold text-indigo-300">Stationary Iteration Solvers</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Splits $A = D + L + U$. The general linear iteration $x^{(k+1)} = H x^{(k)} + c$ converges for any initial vector iff the spectral radius $\rho(H) < 1$.
+          </p>
+          <div class="space-y-2 text-xs font-mono text-slate-300">
+            <div class="p-2 rounded bg-slate-950 border border-slate-800">
+              <strong>Jacobi Method:</strong> $H_J = -D^{-1}(L+U), \quad c = D^{-1}b$
+            </div>
+            <div class="p-2 rounded bg-slate-950 border border-slate-800">
+              <strong>Gauss-Seidel:</strong> $H_{GS} = -(D+L)^{-1}U, \quad c = (D+L)^{-1}b$
+            </div>
+          </div>
+          <p class="text-xs text-slate-400">
+            <strong>Rate of convergence:</strong> $\nu = -\log_{10} [\rho(H)]$. Strict diagonal dominance $|a_{ii}| > \sum_{j \ne i} |a_{ij}|$ guarantees convergence for both.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-6">
+        <h3 class="text-xl font-bold text-white flex items-center space-x-2">
+          <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+          <span>Eigenvalue Bounds: Gerschgorin & Brauer Theorems</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-300 leading-relaxed">
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+            <h4 class="font-bold text-indigo-300">Gerschgorin Circle Theorem</h4>
+            <p class="text-xs text-slate-400">
+              Every eigenvalue $\lambda$ of square matrix $A \in \mathbb{C}^{n \times n}$ lies in the union of $n$ closed Gerschgorin discs:
+            </p>
+            <div class="bg-slate-900 p-2 rounded text-center font-mono text-xs text-emerald-400">
+              $$|\lambda - a_{ii}| \le R_i = \sum_{j \ne i} |a_{ij}|$$
+            </div>
+            <p class="text-xs text-slate-400">Also holds for columns since $\det(A - \lambda I) = \det(A^T - \lambda I)$. Thus eigenvalues lie in the intersection of row and column disc unions.</p>
+          </div>
+
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+            <h4 class="font-bold text-indigo-300">Brauer Cassinian Theorem</h4>
+            <p class="text-xs text-slate-400">
+              Every eigenvalue lies in the union of $n(n-1)/2$ Cassinian ovals:
+            </p>
+            <div class="bg-slate-900 p-2 rounded text-center font-mono text-xs text-emerald-400">
+              $$|\lambda - a_{ii}||\lambda - a_{jj}| \le R_i R_j \quad (i \ne j)$$
+            </div>
+            <p class="text-xs text-slate-400">Yields tighter localized regions than Gerschgorin discs when off-diagonal sums differ significantly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <h3 class="text-lg font-bold text-indigo-300">Jacobi Method for Symmetric Matrices</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Eliminates the largest off-diagonal elements $a_{ik}$ via a series of plane orthogonal transformations $B = S^T A S$:
+          </p>
+          <div class="bg-slate-950 p-3 rounded-lg text-xs font-mono text-emerald-400 border border-slate-800">
+            $$\tan 2\theta = \frac{2 a_{ik}}{a_{ii} - a_{kk}}, \quad |\theta| \le \frac{\pi}{4}$$
+          </div>
+          <p class="text-xs text-slate-400">As iterations proceed, $B_r$ approaches a purely diagonal matrix whose diagonal elements are the eigenvalues, and $S = \prod S_r$ contains the eigenvectors.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <h3 class="text-lg font-bold text-indigo-300">Power Method (Dominant Eigenpair)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Computes the dominant eigenvalue $|\lambda_1| > |\lambda_2| \ge \dots \ge |\lambda_n|$ and its associated eigenvector:
+          </p>
+          <div class="bg-slate-950 p-3 rounded-lg text-xs font-mono text-emerald-400 border border-slate-800">
+            $$y_{k+1} = A v_k, \quad m_{k+1} = \max |y_{k+1}|, \quad v_{k+1} = \frac{y_{k+1}}{m_{k+1}}$$
+            $$\lambda_1 = \lim_{k \to \infty} \frac{(A v_k)_r}{(v_k)_r}$$
+          </div>
+          <p class="text-xs text-slate-400">The Rayleigh quotient $q_k = \frac{v_k^T A v_k}{v_k^T v_k}$ accelerates eigenvalue estimation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GERSCHGORIN DISC VISUALIZER -->
+    <section id="gerschgorin" class="p-6 rounded-2xl bg-slate-900/70 border border-indigo-900/60 space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+        <div>
+          <span class="text-xs font-semibold uppercase text-indigo-400 tracking-wider">Complex Plane Localization</span>
+          <h3 class="text-xl font-bold text-white mt-1">Gerschgorin Discs Visualizer</h3>
+          <p class="text-xs text-slate-400">Plotted for textbook symmetric matrix $A = \begin{pmatrix} 3 & 2 & 2 \\ 2 & 5 & 2 \\ 2 & 2 & 3 \end{pmatrix}$</p>
+        </div>
+        <div class="text-xs text-slate-300 bg-slate-950 px-3 py-2 rounded-lg border border-slate-800">
+          True Eigenvalues: $\lambda_1 = 1, \lambda_2 = 1, \lambda_3 = 9$
+        </div>
+      </div>
+
+      <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex justify-center">
+        <canvas id="gerschgorinCanvas" width="600" height="280" class="max-w-full"></canvas>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+        <div class="p-3 bg-slate-950 rounded-lg border border-indigo-500/30 text-indigo-300">
+          <strong>Disc 1:</strong> Center $c_1 = 3$, Radius $R_1 = |2| + |2| = 4$ <br>
+          Real Interval: $[-1, 7]$
+        </div>
+        <div class="p-3 bg-slate-950 rounded-lg border border-purple-500/30 text-purple-300">
+          <strong>Disc 2:</strong> Center $c_2 = 5$, Radius $R_2 = |2| + |2| = 4$ <br>
+          Real Interval: $[1, 9]$
+        </div>
+        <div class="p-3 bg-slate-950 rounded-lg border border-emerald-500/30 text-emerald-300">
+          <strong>Union:</strong> $\bigcup D_i = [-1, 9]$ <br>
+          Gerschgorin Bound: $|\lambda| \le 9$
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t border-slate-900 bg-slate-950 py-8 text-center text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 space-y-1">
+      <p class="font-semibold text-slate-300">Shivaji University, Kolhapur — Centre for Distance and Online Education (CDOE)</p>
+      <p>M.Sc. Mathematics Part I | Semester I | Numerical Analysis - I (NEP-2020)</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // 1. Newton-Raphson Visualizer
+    const f = (x) => Math.pow(x, 3) - x - 1;
+    const fp = (x) => 3 * Math.pow(x, 2) - 1;
+
+    let nrState = { x: 2.0, k: 0 };
+    const ctx = document.getElementById('nrChart').getContext('2d');
+    
+    const xVals = [];
+    const yVals = [];
+    for (let x = 0.5; x <= 2.2; x += 0.05) {
+      xVals.push(x.toFixed(2));
+      yVals.push(f(x));
+    }
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: xVals,
+        datasets: [
+          {
+            label: 'f(x) = x³ - x - 1',
+            data: yVals,
+            borderColor: '#6366f1',
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.2
+          },
+          {
+            label: 'Tangent at x_k',
+            data: [],
+            borderColor: '#10b981',
+            borderWidth: 2,
+            borderDash: [5, 5],
+            pointRadius: 4,
+            pointBackgroundColor: '#10b981',
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { labels: { color: '#94a3b8' } } },
+        scales: {
+          x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+          y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+        }
+      }
+    });
+
+    function updateTangent() {
+      const xk = nrState.x;
+      const yk = f(xk);
+      const slope = fp(xk);
+      const xNext = xk - yk / slope;
+
+      document.getElementById('currentX').innerText = `x_${nrState.k} = ${xk.toFixed(4)}`;
+      document.getElementById('currentFx').innerText = yk.toFixed(4);
+      document.getElementById('currentFpx').innerText = slope.toFixed(4);
+      document.getElementById('currentStep').innerText = `k = ${nrState.k}`;
+
+      const tangentData = xVals.map((valStr) => {
+        const x = parseFloat(valStr);
+        if (x < Math.min(xNext, xk) - 0.2 || x > Math.max(xNext, xk) + 0.2) return null;
+        return yk + slope * (x - xk);
+      });
+
+      chart.data.datasets[1].data = tangentData;
+      chart.update();
+
+      nrState.x = xNext;
+      nrState.k += 1;
+    }
+
+    document.getElementById('btnStep').addEventListener('click', updateTangent);
+    document.getElementById('btnReset').addEventListener('click', () => {
+      nrState.x = 2.0;
+      nrState.k = 0;
+      chart.data.datasets[1].data = [];
+      chart.update();
+      document.getElementById('currentX').innerText = 'x₀ = 2.0000';
+      document.getElementById('currentFx').innerText = f(2.0).toFixed(4);
+      document.getElementById('currentFpx').innerText = fp(2.0).toFixed(4);
+      document.getElementById('currentStep').innerText = 'k = 0';
+    });
+
+    updateTangent();
+
+    // 2. Gerschgorin Visualizer
+    const gCanvas = document.getElementById('gerschgorinCanvas');
+    const gCtx = gCanvas.getContext('2d');
+
+    function drawGerschgorin() {
+      const w = gCanvas.width;
+      const h = gCanvas.height;
+      gCtx.clearRect(0, 0, w, h);
+
+      const minX = -4, maxX = 12;
+      const scaleX = (w - 80) / (maxX - minX);
+      const toCanvasX = (val) => 40 + (val - minX) * scaleX;
+      const centerY = h / 2;
+
+      gCtx.strokeStyle = '#334155';
+      gCtx.lineWidth = 1;
+      gCtx.beginPath();
+      gCtx.moveTo(20, centerY);
+      gCtx.lineTo(w - 20, centerY);
+      gCtx.stroke();
+
+      gCtx.fillStyle = '#64748b';
+      gCtx.font = '10px monospace';
+      for (let i = -2; i <= 10; i += 2) {
+        const px = toCanvasX(i);
+        gCtx.beginPath();
+        gCtx.moveTo(px, centerY - 4);
+        gCtx.lineTo(px, centerY + 4);
+        gCtx.stroke();
+        gCtx.fillText(i, px - 6, centerY + 16);
+      }
+
+      const cx1 = toCanvasX(3);
+      const r1 = 4 * scaleX;
+      gCtx.beginPath();
+      gCtx.arc(cx1, centerY, r1, 0, 2 * Math.PI);
+      gCtx.fillStyle = 'rgba(99, 102, 241, 0.15)';
+      gCtx.fill();
+      gCtx.strokeStyle = '#6366f1';
+      gCtx.lineWidth = 1.5;
+      gCtx.stroke();
+
+      const cx2 = toCanvasX(5);
+      const r2 = 4 * scaleX;
+      gCtx.beginPath();
+      gCtx.arc(cx2, centerY, r2, 0, 2 * Math.PI);
+      gCtx.fillStyle = 'rgba(168, 85, 247, 0.15)';
+      gCtx.fill();
+      gCtx.strokeStyle = '#a855f7';
+      gCtx.lineWidth = 1.5;
+      gCtx.stroke();
+
+      const eig1 = toCanvasX(1);
+      const eig2 = toCanvasX(9);
+
+      gCtx.fillStyle = '#10b981';
+      gCtx.beginPath();
+      gCtx.arc(eig1, centerY, 5, 0, 2 * Math.PI);
+      gCtx.fill();
+      gCtx.fillText('λ=1', eig1 - 10, centerY - 10);
+
+      gCtx.beginPath();
+      gCtx.arc(eig2, centerY, 5, 0, 2 * Math.PI);
+      gCtx.fill();
+      gCtx.fillText('λ=9', eig2 - 10, centerY - 10);
+    }
+
+    drawGerschgorin();
+  </script>
+</body>
+</html>
